@@ -4,12 +4,12 @@ public class Persona {
 
     private String nombre;
     private String domicilio;
-    private long telefono;
+    private String correo;
 
-    public Persona(String nombre, String domicilio, long telefono) {
+    public Persona(String nombre, String domicilio, String correo) {
         this.nombre = nombre;
         this.domicilio = domicilio;
-        this.telefono = telefono;
+        this.correo = correo;
     }
 
     public String getNombre() {
@@ -28,12 +28,12 @@ public class Persona {
         this.domicilio = domicilio;
     }
 
-    public long getTelefono() {
-        return telefono;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setTelefono(long telefono) {
-        this.telefono = telefono;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     @Override
@@ -41,13 +41,13 @@ public class Persona {
         return "Persona{" +
                 "nombre='" + nombre + '\'' +
                 ", domicilio='" + domicilio + '\'' +
-                ", telefono='" + telefono + '\'' +
+                ", correo='" + correo + '\'' +
                 '}';
     }
     
     public void mostrarInfo(){
         System.out.println("Nombre: "+nombre);
         System.out.println("Domicilio: "+domicilio);
-        System.out.println("Teléfono: "+telefono);
+        System.out.println("Correo: "+correo);
     }
 }
