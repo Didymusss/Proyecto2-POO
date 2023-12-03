@@ -55,7 +55,7 @@ public class Trabajador extends Persona{
     public void prestamoLibro(Libro libro, Cliente cliente){
 
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Confirmacion INE (true/false): ");
+        System.out.print("Copia de credencial INE (true/false): ");
         boolean ine = scanner.nextBoolean();
         scanner.nextLine(); 
 
