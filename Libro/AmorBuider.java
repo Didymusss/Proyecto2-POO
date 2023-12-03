@@ -10,6 +10,7 @@ public class AmorBuider implements LibroBuilder{
 
     @Override
     public void crearTitulo() {
+        System.out.println("Ingrese el nombre del libro: ");
         // TODO Auto-generated method stub
         libro.setTitulo("Orgullo y Prejuicio");
     }
