@@ -5,14 +5,11 @@ public class Libro {
     private String genero;
     private int numCodigo;
     private boolean estado;
+    private static int numLibros = 0; //Contador de libros
 
-    /*public Libro(String titulo, String autor, String genero, int numCodigo, boolean estado) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.genero = genero;
-        this.numCodigo = numCodigo;
-        this.estado = estado;
-    }*/
+    public Libro() {
+        numLibros ++;
+    }
 
     //Getters y setters
     public String getTitulo() {
@@ -44,6 +41,9 @@ public class Libro {
     }
     public void setEstado(boolean estado){
         this.estado= estado;
+    }
+    public static int getNumLibros() {
+        return numLibros;
     }
 
     @Override
