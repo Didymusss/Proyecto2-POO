@@ -4,19 +4,17 @@ public class Director {
 
     private LibroBuilder libroBuilder;
 
-    public Libro getLibro(){
-        return this.libroBuilder.getLibro();
+    public Director(LibroBuilder libroBuilder) {
+        this.libroBuilder = libroBuilder;
     }
 
-    public void crearLibro(){
-        this.libroBuilder.crearTitulo();
-        this.libroBuilder.crearAutor();
-        this.libroBuilder.crearGenero();
-        this.libroBuilder.crearNumCodigo();
-    }
-
-    public void setLibroBuilder(LibroBuilder libroBuilder){
-        this.libroBuilder= libroBuilder;
+    public Libro construirLibro(String titulo, String autor, int numCodigo, boolean estado) {
+        return libroBuilder
+                .construirTitulo(titulo)
+                .construirAutor(autor)
+                .construirNumCodigo(numCodigo)
+                .construirEstado(estado)
+                .build();
     }
     
 }

@@ -1,11 +1,11 @@
 package Libro;
 
-interface LibroBuilder {
+public interface LibroBuilder {
 
-    public void crearTitulo();
-    public void crearAutor();
-    public void crearGenero();
-    public void crearNumCodigo();
-    public Libro getLibro();
+    LibroBuilder construirTitulo(String titulo);
+    LibroBuilder construirAutor(String autor);
+    LibroBuilder construirNumCodigo(int numCodigo);
+    LibroBuilder construirEstado(boolean estado);
+    Libro build();
     
 }
