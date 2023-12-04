@@ -61,7 +61,8 @@ public class Biblioteca{
             System.out.print("2. Eliminar cliente ");
             System.out.print("3. Prestamos ");
             System.out.print("4. Ver registro ");
-            System.out.print("5. Salir ");
+            System.out.println("5. Registrar libro");
+            System.out.print("6. Salir ");
 
             System.out.print("Elige una opcion: ");
             opcion = input.nextInt();
@@ -79,8 +80,9 @@ public class Biblioteca{
                 case 4:
 
                     break;
-
                 case 5:
+                    break;
+                case 6:
                     System.out.println("Saliendo del programa...");
                     break;
                 default:

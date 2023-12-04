@@ -1,6 +1,8 @@
 package Persona;
+import Registro.Observador;
+import Registro.Sujeto;
 
-public class Persona {
+public class Persona implements Sujeto{
 
     private String nombre;
     private String domicilio;
@@ -49,4 +51,30 @@ public class Persona {
         System.out.println("Domicilio: "+domicilio);
         System.out.println("Correo: "+correo);
     }
+
+    @Override
+    public Object getNotificacion(Observador obj) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void notificar() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void register(Observador obj) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void unregister(Observador obj) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    
 }

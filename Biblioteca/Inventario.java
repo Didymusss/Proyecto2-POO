@@ -11,22 +11,20 @@ import Libro.Libro;
 public class Inventario {
     private List<Libro> inventarioLibros = new LinkedList<>();
 
-    public LinkedList<Libro> leerInventario(){
+    public void leerInventario(){
         ObjectInputStream fileIn;
-        LinkedList<Libro> inventarioLibros;
+
 
         try {
             fileIn = new ObjectInputStream(new FileInputStream("inventarioLibros"));
-            inventarioLibros = (LinkedList<Libro>) fileIn.readObject();
+            this.inventarioLibros = (LinkedList<Libro>) fileIn.readObject();
             fileIn.close();
-            return inventarioLibros;
+
         } catch (Exception e) {
             // TODO: handle exception
             System.out.println("Error: " + e.getMessage());
         }
 
-        return new LinkedList<Libro>();
-        
 
     }
 
@@ -36,31 +34,41 @@ public class Inventario {
             fileOut.writeObject(inventario);
             fileOut.close();
         } catch (Exception e) {
-            // TODO: handle exception
+           
             System.out.println("Error: " + e.getMessage());
         }
     }
 
-    boolean buscarLibro(String titulo){
+    Libro buscarLibro(String titulo){
         for(Libro libro: inventarioLibros){
             if(libro.getTitulo().equals(titulo)){
-                return true;
+                return libro;
             }
         }
-        return false;
+        return null;
     }
 
-    boolean buscarLibro(int numCodigo){
+    Libro buscarLibro(int numCodigo){
         for(Libro libro: inventarioLibros){
             if(libro.getNumCodigo() == numCodigo){
-                return true;
+                return libro;
             }
         }
-        return false;
+        return null;
     }
     
     void aniadirLibro(Libro libro){
         inventarioLibros.add(libro);
+    }
+
+    void eliminarLibro(Libro libro){
+        inventarioLibros.remove(libro);
+    }
+
+    void mostrarInventario(){
+        for(Libro libro: inventarioLibros){
+            System.out.println(libro);
+        }
     }
 
     
