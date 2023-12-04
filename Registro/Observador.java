@@ -1,7 +1,8 @@
+package Registro;
 import Libro.Libro;
 import Persona.Cliente;
 
-public interface Observer {
+public interface Observador {
 
     
     public void update();

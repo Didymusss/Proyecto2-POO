@@ -1,3 +1,4 @@
+package Registro;
 public interface Sujeto{
     public void register(Observador obj);
     public void unregister(Observador obj);
