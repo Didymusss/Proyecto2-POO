@@ -1,7 +1,12 @@
+package Registro;
 import Libro.Libro;
 import Persona.Cliente;
 
-public class Registrador implements Observer {
+public class Registrador implements Observador {
+
+    public void guardarObservador(){
+        
+    }
 
     @Override
     public void setSubject(Libro libro) {
