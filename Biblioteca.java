@@ -1,15 +1,30 @@
 import java.io.File;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import Persona.Cliente;
 
+import Libro.CienciaFiccionBuilder;
+import Libro.Comedia;
+import Libro.Director;
+import Libro.Libro;
+import Libro.RomanceBuilder;
+import Libro.TerrorBuilder;
+import Persona.Cliente;
+import Persona.PersonaFacade;
 import Login.Sesion;
+import Persona.*;
 
 public class Biblioteca{
 
     public static void main(String[] args) {
-        List <Cliente> listaClientes = new LinkedList<>();
+        List <Cliente> listaClientes = new LinkedList<>();//Lista de clientes
+        List <Cliente> listaTrabajadores = new LinkedList<>();//Lista de trabajadores
+        List<Libro> listaRomance = new ArrayList<>();
+        List<Libro> listaCienciaFiccion = new ArrayList<>();
+        List<Libro> listaComedia = new ArrayList<>();
+        List<Libro> listaTerror = new ArrayList<>();
+
         Scanner input = new Scanner(System.in);
         int opcion;
         File usuariosString = new File("usuarios.txt");
@@ -62,7 +77,8 @@ public class Biblioteca{
             System.out.print("3. Prestamos ");
             System.out.print("4. Ver registro ");
             System.out.println("5. Registrar libro");
-            System.out.print("6. Salir ");
+            System.out.println("6. Eliminar libro");
+            System.out.print("7. Salir ");
 
             System.out.print("Elige una opcion: ");
             opcion = input.nextInt();
@@ -70,26 +86,197 @@ public class Biblioteca{
             switch (opcion) {
                 case 1:
 
-                    break;
+                    Scanner scanner = new Scanner(System.in);
+                    System.out.print("Ingresa el nombre del cliente: ");
+                    String nombreCliente = scanner.nextLine();
+            
+                    System.out.print("Ingresa el domicilio del cliente: ");
+                    String domicilioCliente = scanner.nextLine();
+            
+                    System.out.print("Ingresa el correo del cliente: ");
+                    String correoCliente = scanner.nextLine();
+            
+                    System.out.print("Ingresa el numero de cliente: ");
+                    int numCliente = scanner.nextInt();
+            
+                    Cliente cliente = new Cliente(nombreCliente, domicilioCliente, correoCliente, numCliente, true);
+
+                    listaClientes.add(cliente);//El cliente se guarda en la lista y ya esta registrado 
+
+
+                break;
+
                 case 2:
 
-                    break;
+                    System.out.print("\nIngresa el numero de cliente a eliminar: ");
+                    int numEliminar = scanner.nextInt();
+
+                    for (Cliente clienteEmilinar : listaClientes) {
+                        if (clienteEmilinar.getNumeroCliente() == numEliminar) {
+                            listaClientes.remove(clienteEmilinar);
+                            System.out.println("Cliente eliminado exitosamente.");
+                            break; 
+                        }
+                    }
+  
+
+                break;
                 case 3:
 
-                    break;
+                    
+                    System.out.println("****Prestamos****");
+
+                    System.out.print("\nIngresa el numero del cliente que requiere el prestamo: ");
+                    int numPrestamo = scanner.nextInt();
+
+                    System.out.print("\nIngrese su numero de trabajador: ");
+                    int numTrabajador = scanner.nextInt();
+
+                    for (Cliente clientePrestamo : listaClientes) {
+                        if (clientePrestamo.getNumeroCliente() == numPrestamo) {
+
+                            PersonaFacade personaFacade = new PersonaFacade(trabajador, clientePrestamo);
+
+                            System.out.println("Pidele que llene un formulario");
+                            //El trabajdaor recibe los libros y hace el prestamo
+                            personaFacade.realizarPrestamo(cliente.getLibrosTomados());
+                            
+                        }else{
+                            System.out.println("No se encontro al cliente en la lista, registralo antes");
+                        }
+                    }
+                    
+
+                break;
                 case 4:
 
                     break;
                 case 5:
-                    break;
+
+                    System.out.println("Eligue que genero de libro vas a registrar: ");
+                    System.out.println("1. Romance");
+                    System.out.println("2. Ciencia Ficcion");
+                    System.out.println("3. Comedia ");
+                    System.out.println("4. Terror"); 
+                    System.out.print("Elige una opcion: ");
+                    opcion = input.nextInt();
+
+                    switch (opcion) {
+                        case 1:
+
+                            RomanceBuilder romanceBuilder = new RomanceBuilder();
+                            Director director = new Director(romanceBuilder);
+
+                            Libro libroR = director.construirLibro();
+                            System.out.println("Libro: " + libroR); 
+                            listaRomance.add(libroR);                      
+
+                           break;
+                        case 2:
+
+                            CienciaFiccionBuilder cienciaBuilder = new CienciaFiccionBuilder();
+                            Director director2 = new Director(cienciaBuilder);
+
+                            Libro libroC = director2.construirLibro();
+                            System.out.println("Libro: " + libroC);
+                            listaCienciaFiccion.add(libroC);
+
+                            break;
+                        case 3:
+
+                            Comedia comediaBuilder = new Comedia();
+                            Director director3 = new Director(comediaBuilder);
+
+                            Libro libroCo = director3.construirLibro();
+                            System.out.println("Libro: " + libroCo);
+                            listaComedia.add(libroCo);
+
+                            break;
+                        case 4:
+                            TerrorBuilder terrorBuilder = new TerrorBuilder();
+                            Director director4 = new Director(terrorBuilder);
+
+                            Libro libroT = director4.construirLibro();
+                            System.out.println("Libro: " + libroT);
+                            listaTerror.add(libroT);
+
+                            break;
+
+                        default:
+                            System.out.println("Opción no válida");
+                            break;
+                    }    
+                        
+                break;
+
                 case 6:
+
+                    System.out.println("Ingrese el codigo del libro que desea eliminar:");
+                    int codigoEliminar = scanner.nextInt();
+
+                    System.out.println("Eligue que genero de libro a eliminar: ");
+                    System.out.println("1. Romance");
+                    System.out.println("2. Ciencia Ficcion");
+                    System.out.println("3. Comedia ");
+                    System.out.println("4. Terror"); 
+                    System.out.print("Elige una opcion: ");
+                    opcion = input.nextInt();
+
+                    switch (opcion) {
+                        case 1:
+
+                            for (Libro Rlibro : listaRomance ) {
+                                if (Rlibro.getNumCodigo() == codigoEliminar) {
+                                    listaRomance.remove(Rlibro);
+                                    System.out.println("Libro eliminado: " + Rlibro);
+                                }
+                            }                     
+
+                        break;
+                        case 2:
+
+                            for (Libro Clibro : listaCienciaFiccion ) {
+                                if (Clibro.getNumCodigo() == codigoEliminar) {
+                                    listaCienciaFiccion.remove(Clibro);
+                                    System.out.println("Libro eliminado: " + Clibro);
+                                }
+                            } 
+                            break;
+                        case 3:
+
+                            for (Libro Colibro : listaComedia  ) {
+                                if (Colibro.getNumCodigo() == codigoEliminar) {
+                                    listaComedia .remove(Colibro);
+                                    System.out.println("Libro eliminado: " + Colibro);
+                                }
+                            } 
+
+                            break;
+                        case 4:
+                            for (Libro Tlibro : listaTerror   ) {
+                                if (Tlibro.getNumCodigo() == codigoEliminar) {
+                                    listaTerror  .remove(Tlibro);
+                                    System.out.println("Libro eliminado: " + Tlibro);
+                                }
+                            } 
+
+                            break;
+
+                        default:
+                            System.out.println("Opción no válida");
+                            break;
+                    }    
+                        
+                break;
+
+                case 7:
                     System.out.println("Saliendo del programa...");
                     break;
                 default:
                     System.out.println("Opción no válida");
-            }
+                }
 
-            }while(opcion!=5);
+                }while(opcion!=7);
             
 
 
@@ -102,12 +289,11 @@ public class Biblioteca{
 
             do{
             System.out.println("*****MENU*****");
-            System.out.println("1. Agregar libro");
-            System.out.println("2. Eliminar libro");
-            System.out.println("3. Buscar libro");
-            System.out.println("4. Devoluciones");
-            System.out.println("5. Catalogo");
-            System.out.println("6. Salir");
+            System.out.println("1. Agregar libro a tu lista ");
+            System.out.println("2. Buscar libro");
+            System.out.println("3. Devoluciones");
+            System.out.println("4. Catalogo");
+            System.out.println("5. Salir");
 
             System.out.print("Elige una opcion: ");
             opcion = input.nextInt();
@@ -127,10 +313,6 @@ public class Biblioteca{
                     break;
 
                 case 5:
-
-                    break;
-
-                case 6:
                     System.out.println("Saliendo del programa...");
                     break;
                 default:
