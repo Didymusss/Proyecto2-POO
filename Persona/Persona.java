@@ -38,11 +38,10 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "Persona{" +
-                "nombre='" + nombre + '\'' +
-                ", domicilio='" + domicilio + '\'' +
-                ", correo='" + correo + '\'' +
-                '}';
+        return "Persona: " +
+                "nombre=" + nombre +
+                ", domicilio=" + domicilio +
+                ", correo=" + correo;
     }
     
     public void mostrarInfo(){
