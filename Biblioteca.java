@@ -132,7 +132,7 @@ public class Biblioteca{
                 case 2:
 
                     System.out.print("\nIngresa el numero de cliente a eliminar: ");
-                    int numEliminar = scanner.nextInt();
+                    int numEliminar = input.nextInt();
 
                     for (Cliente clienteEmilinar : listaClientes) {
                         if (clienteEmilinar.getNumeroCliente() == numEliminar) {
@@ -146,7 +146,8 @@ public class Biblioteca{
                 break;
                 case 3:
 
-                    
+                
+                    /* 
                     System.out.println("****Prestamos****");
 
                     System.out.print("\nIngresa el numero del cliente que requiere el prestamo: ");
@@ -167,7 +168,7 @@ public class Biblioteca{
                         }else{
                             System.out.println("No se encontro al cliente en la lista, registralo antes");
                         }
-                    }
+                    } */
                     
 
                 break;
@@ -235,7 +236,7 @@ public class Biblioteca{
                 case 6:
 
                     System.out.println("Ingrese el codigo del libro que desea eliminar:");
-                    int codigoEliminar = scanner.nextInt();
+                    int codigoEliminar = input.nextInt();
 
                     System.out.println("Eligue el genero de libro a eliminar: ");
                     System.out.println("1. Romance");
@@ -295,7 +296,7 @@ public class Biblioteca{
                 case 7: //Devoluciones
                     
                     System.out.print("\nIngresa el numero del cliente que requiere la devolucion: ");
-                    int clienteDevo= scanner.nextInt();
+                    int clienteDevo= input.nextInt();
                     
                     System.out.print("\nIngresa tu numero de trabajador: ");
                     int trabajadorUsuario = input.nextInt();
