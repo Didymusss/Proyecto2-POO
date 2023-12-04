@@ -1,10 +1,18 @@
+import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
+import Persona.Cliente;
+
+import Login.Sesion;
 
 public class Biblioteca{
 
     public static void main(String[] args) {
+        List <Cliente> listaClientes = new LinkedList<>();
         Scanner input = new Scanner(System.in);
         int opcion;
+        File usuariosString = new File("usuarios.txt");
 
         System.out.println("Bienvenido a la Biblioteca");
         System.out.println("Que tipo de usuario eres?");
@@ -13,9 +21,39 @@ public class Biblioteca{
         opcion = input.nextInt();
 
         if(opcion == 1){//Trabajador
-            System.out.println("------Inicio de sesion------");
-            System.out.print("Usuario: ");
-            System.out.print("Contraseña: ");
+
+            System.out.println("Iniciar sesion o crear usuario?");
+            System.out.println("1. Iniciar sesion");
+            System.out.println("2. Crear usuario");
+            opcion = input.nextInt();
+
+            if(opcion == 1){
+                System.out.println("------Inicio de sesion------");
+                System.out.print("Usuario: ");
+                String userName = input.nextLine();
+                System.out.print("Contraseña: ");
+                String password = input.nextLine();
+                while (!Sesion.userExists(userName, password, usuariosString)) {
+                    System.out.println(("Ingreso inválido, prueba otra vez"));
+                    System.out.print("Usuario: ");
+                    userName = input.nextLine();
+                    System.out.print("Contraseña: ");
+                    password = input.nextLine();
+                }
+            } else {
+                System.out.print("Usuario: ");
+                String userName = input.nextLine();
+                System.out.print("Contraseña: ");
+                String password = input.nextLine();
+                while(Sesion.userExists(userName, usuariosString)){
+                    System.out.println(("Usuario ya existe, prueba otra vez"));
+                    System.out.print("Usuario: ");
+                    userName = input.nextLine();
+                    System.out.print("Contraseña: ");
+                    password = input.nextLine();
+                };
+                Sesion.register(userName, password, usuariosString);;
+            }
 
             do{
             System.out.print("*****MENU*****");

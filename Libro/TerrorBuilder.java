@@ -1,12 +1,11 @@
 package Libro;
 
-public class RomanceBuilder implements LibroBuilder {
-
+public class TerrorBuilder implements LibroBuilder{
     private Libro libro;
 
-    public RomanceBuilder() {
+    public TerrorBuilder() {
         this.libro = new Libro();
-        this.libro.setGenero("Romance");
+        this.libro.setGenero("Terror");
     }
 
     @Override

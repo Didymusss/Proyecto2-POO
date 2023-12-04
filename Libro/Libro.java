@@ -5,10 +5,10 @@ public class Libro {
     private String genero;
     private int numCodigo;
     private boolean estado;
-    private static int numLibros = 0; //Contador de libros
+    public static int numLibros; //Contador de libros
 
     public Libro() {
-        numLibros ++;
+        numLibros++;
     }
 
     //Getters y setters
@@ -42,9 +42,7 @@ public class Libro {
     public void setEstado(boolean estado){
         this.estado= estado;
     }
-    public static int getNumLibros() {
-        return numLibros;
-    }
+
 
     @Override
     public String toString() {

@@ -1,12 +1,12 @@
 package Libro;
 
-public class RomanceBuilder implements LibroBuilder {
+public class CienciaFiccionBuilder implements LibroBuilder{
 
     private Libro libro;
 
-    public RomanceBuilder() {
+    public CienciaFiccionBuilder() {
         this.libro = new Libro();
-        this.libro.setGenero("Romance");
+        this.libro.setGenero("Ciencia Ficcion");
     }
 
     @Override
@@ -37,4 +37,5 @@ public class RomanceBuilder implements LibroBuilder {
     public Libro build() {
         return this.libro;
     }
+    
 }
