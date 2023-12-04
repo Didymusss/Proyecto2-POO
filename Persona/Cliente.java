@@ -34,8 +34,15 @@ public class Cliente extends Persona {
         return librosTomados;
     }
 
+
+    //Libros que toma prestado el cliente
     public void tomarLibro(Libro libro) {
-        librosTomados.add(libro);
+        if (librosTomados.size() < 3) {
+            librosTomados.add(libro);
+            System.out.println("Libro tomado con exito.");
+        } else {
+            System.out.println("No se pueden tomar mas de 3 libros en prestamo.");
+        }
     }
 
     public void devolverLibro(Libro libro) {
