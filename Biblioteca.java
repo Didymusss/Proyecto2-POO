@@ -10,8 +10,6 @@ import Libro.Director;
 import Libro.Libro;
 import Libro.RomanceBuilder;
 import Libro.TerrorBuilder;
-import Persona.Cliente;
-import Persona.PersonaFacade;
 import Login.Sesion;
 import Persona.*;
 
@@ -19,7 +17,7 @@ public class Biblioteca{
 
     public static void main(String[] args) {
         List <Cliente> listaClientes = new LinkedList<>();//Lista de clientes
-        List <Cliente> listaTrabajadores = new LinkedList<>();//Lista de trabajadores
+        List <Trabajador> listaTrabajadores = new LinkedList<>();//Lista de trabajadores
         List<Libro> listaRomance = new ArrayList<>();
         List<Libro> listaCienciaFiccion = new ArrayList<>();
         List<Libro> listaComedia = new ArrayList<>();
@@ -54,6 +52,8 @@ public class Biblioteca{
                     userName = input.nextLine();
                     System.out.print("Contraseña: ");
                     password = input.nextLine();
+                    
+                    
                 }
             } else {
                 System.out.print("Usuario: ");
@@ -67,7 +67,29 @@ public class Biblioteca{
                     System.out.print("Contraseña: ");
                     password = input.nextLine();
                 };
-                Sesion.register(userName, password, usuariosString);;
+                Sesion.register(userName, password, usuariosString);
+
+                //Guardar trabajador
+                System.out.print("Nombre del trabajador: ");
+                String nombre = input.nextLine();
+
+                System.out.print("Domicilio del trabajador: ");
+                String domicilio = input.nextLine();
+
+                System.out.print("Correo del trabajador: ");
+                String correo = input.nextLine();
+
+                System.out.print("RFC del trabajador: ");
+                String rfc = input.nextLine();
+
+                System.out.print("Número de trabajador: ");
+                int numTrabajador = input.nextInt();
+
+                Trabajador trabajador = new Trabajador(nombre, domicilio, correo, rfc, numTrabajador);
+
+                listaTrabajadores.add(trabajador);
+                                            
+
             }
 
             do{
@@ -78,7 +100,8 @@ public class Biblioteca{
             System.out.print("4. Ver registro ");
             System.out.println("5. Registrar libro");
             System.out.println("6. Eliminar libro");
-            System.out.print("7. Salir ");
+            System.out.println("7. Devoluciones");
+            System.out.print("8. Salir ");
 
             System.out.print("Elige una opcion: ");
             opcion = input.nextInt();
@@ -214,7 +237,7 @@ public class Biblioteca{
                     System.out.println("Ingrese el codigo del libro que desea eliminar:");
                     int codigoEliminar = scanner.nextInt();
 
-                    System.out.println("Eligue que genero de libro a eliminar: ");
+                    System.out.println("Eligue el genero de libro a eliminar: ");
                     System.out.println("1. Romance");
                     System.out.println("2. Ciencia Ficcion");
                     System.out.println("3. Comedia ");
@@ -246,7 +269,7 @@ public class Biblioteca{
 
                             for (Libro Colibro : listaComedia  ) {
                                 if (Colibro.getNumCodigo() == codigoEliminar) {
-                                    listaComedia .remove(Colibro);
+                                    listaComedia.remove(Colibro);
                                     System.out.println("Libro eliminado: " + Colibro);
                                 }
                             } 
@@ -255,7 +278,7 @@ public class Biblioteca{
                         case 4:
                             for (Libro Tlibro : listaTerror   ) {
                                 if (Tlibro.getNumCodigo() == codigoEliminar) {
-                                    listaTerror  .remove(Tlibro);
+                                    listaTerror.remove(Tlibro);
                                     System.out.println("Libro eliminado: " + Tlibro);
                                 }
                             } 
@@ -269,14 +292,39 @@ public class Biblioteca{
                         
                 break;
 
-                case 7:
+                case 7: //Devoluciones
+                    
+                    System.out.print("\nIngresa el numero del cliente que requiere la devolucion: ");
+                    int clienteDevo= scanner.nextInt();
+                    
+                    System.out.print("\nIngresa tu numero de trabajador: ");
+                    int trabajadorUsuario = input.nextInt();
+
+                    for (Trabajador trabajdorD : listaTrabajadores) {
+                        if (trabajdorD.getNumTrabajador() == trabajadorUsuario) {
+
+                            for (Cliente Dcliente : listaClientes) {
+                                if (Dcliente.getNumeroCliente() == clienteDevo) {
+
+                                    PersonaFacade personaFacade = new PersonaFacade(trabajdorD, Dcliente);
+                                    
+                                }else{
+                                    System.out.println("No se encontro al cliente en la lista, registralo antes");
+                                }
+                            }
+
+                        }
+                    }
+                
+
+                case 8:
                     System.out.println("Saliendo del programa...");
                     break;
                 default:
                     System.out.println("Opción no válida");
                 }
 
-                }while(opcion!=7);
+                }while(opcion!=8);
             
 
 
@@ -287,39 +335,164 @@ public class Biblioteca{
             System.out.print("Usuario: ");
             System.out.print("Contraseña: ");
 
+            System.out.print("\nIngresa tu numero de cliente: ");
+            int clienteUsuario = input.nextInt();
+
+            for (Cliente clientePrestamo : listaClientes) {
+                if (clientePrestamo.getNumeroCliente() == clienteUsuario) {
+                    
+        
+            
+
             do{
             System.out.println("*****MENU*****");
             System.out.println("1. Agregar libro a tu lista ");
             System.out.println("2. Buscar libro");
-            System.out.println("3. Devoluciones");
-            System.out.println("4. Catalogo");
-            System.out.println("5. Salir");
+            System.out.println("3. Catalogo");
+            System.out.println("4. Salir");
 
             System.out.print("Elige una opcion: ");
             opcion = input.nextInt();
 
             switch (opcion) {
                 case 1:
+                    System.out.println("Ingrese el codigo del libro que desea agregar a su lista:");
+                    int codigoAgregarLista = input.nextInt();
 
-                    break;
+                    System.out.println("Eligue el genero del libro que quieres agregar: ");
+                    System.out.println("1. Romance");
+                    System.out.println("2. Ciencia Ficcion");
+                    System.out.println("3. Comedia ");
+                    System.out.println("4. Terror"); 
+                    System.out.print("Elige una opcion: ");
+                    opcion = input.nextInt();
+
+                    switch (opcion) {
+                        case 1:
+
+                            for (Libro Rlibro : listaRomance ) {
+                                if (Rlibro.getNumCodigo() == codigoAgregarLista) {
+                                    clientePrestamo.tomarLibro(Rlibro);
+                                    System.out.println("Libro agregado: " + Rlibro);
+                                }
+                            }                     
+
+                        break;
+                        case 2:
+
+                            for (Libro Clibro : listaCienciaFiccion ) {
+                                if (Clibro.getNumCodigo() == codigoAgregarLista) {
+                                    clientePrestamo.tomarLibro(Clibro);
+                                    System.out.println("Libro agregado: " + Clibro);
+                                }
+                            } 
+                            break;
+                        case 3:
+
+                            for (Libro Colibro : listaComedia  ) {
+                                if (Colibro.getNumCodigo() == codigoAgregarLista) {
+                                    clientePrestamo.tomarLibro(Colibro);
+                                    System.out.println("Libro agregado: " + Colibro);
+                                }
+                            } 
+
+                            break;
+                        case 4:
+                            for (Libro Tlibro : listaTerror   ) {
+                                if (Tlibro.getNumCodigo() == codigoAgregarLista) {
+                                    clientePrestamo.tomarLibro(Tlibro);
+                                    System.out.println("Libro agregado: " + Tlibro);
+                                }
+                            } 
+
+                        break;
+
+                        default:
+                            System.out.println("Opción no válida");
+                        break;
+                    }
+
+                break;
+
                 case 2:
 
-                    break;
+                    System.out.println("Ingrese el codigo del libro que desea buscar:");
+                    int codigoBuscar = input.nextInt();
+
+                    System.out.println("Eligue el genero del libro a buscar: ");
+                    System.out.println("1. Romance");
+                    System.out.println("2. Ciencia Ficcion");
+                    System.out.println("3. Comedia ");
+                    System.out.println("4. Terror"); 
+                    System.out.print("Elige una opcion: ");
+                    opcion = input.nextInt();
+
+                    switch (opcion) {
+                        case 1:
+
+                            for (Libro Rlibro : listaRomance ) {
+                                if (Rlibro.getNumCodigo() == codigoBuscar) {
+                                    
+                                    System.out.println("Libro encontrado: " + Rlibro);
+                                }
+                            }                     
+
+                        break;
+                        case 2:
+
+                            for (Libro Clibro : listaCienciaFiccion ) {
+                                if (Clibro.getNumCodigo() == codigoBuscar) {
+                                    
+                                    System.out.println("Libro encontrado: " + Clibro);
+                                }
+                            } 
+                            break;
+                        case 3:
+
+                            for (Libro Colibro : listaComedia  ) {
+                                if (Colibro.getNumCodigo() == codigoBuscar) {
+                                    
+                                    System.out.println("Libro encontrado: " + Colibro);
+                                }
+                            } 
+
+                            break;
+                        case 4:
+                            for (Libro Tlibro : listaTerror   ) {
+                                if (Tlibro.getNumCodigo() == codigoBuscar) {
+                                    
+                                    System.out.println("Libro encontrado: " + Tlibro);
+                                }
+                            } 
+
+                            break;
+
+                        default:
+                            System.out.println("Opción no válida");
+                            break;
+                    }
+                
+                break;
                 case 3:
-
+                
+                
+                
                     break;
+            
                 case 4:
-
-                    break;
-
-                case 5:
                     System.out.println("Saliendo del programa...");
                     break;
                 default:
                     System.out.println("Opción no válida");
             }
 
-            }while(opcion !=6);
+            }while(opcion !=4);
+
+            }else{
+                    System.out.println("No se encontro al cliente en la lista");
+                }
+            }
+            
             input.close();
 
 

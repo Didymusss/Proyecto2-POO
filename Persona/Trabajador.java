@@ -122,6 +122,17 @@ public class Trabajador extends Persona{
         scanner.close();
     }
 
+    public void devolverLibros(List<Libro> libros) {
+        for (Libro libro : libros) {
+            if (librosPrestados.contains(libro)) {
+                librosPrestados.remove(libro);
+                System.out.println("Libro devuelto: " + libro.getTitulo());
+            } else {
+                System.out.println("El libro " + libro.getTitulo() + " no está en la lista de libros prestados.");
+            }
+        }
+    }
+
 }
 
 
