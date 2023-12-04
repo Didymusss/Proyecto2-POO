@@ -52,7 +52,7 @@ public class Trabajador extends Persona{
     }
 
     //Prestamo 
-    public void prestamoLibro(Libro libro, Cliente cliente){
+    public void prestamoLibro(List<Libro> libros, Cliente cliente){
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Copia de credencial INE (true/false): ");
@@ -85,7 +85,9 @@ public class Trabajador extends Persona{
 
             //Informacion
             System.out.println("\nInformacion del prestamo:");
-            System.out.println("Libro prestado: " + libro.getTitulo());
+            for (Libro libro : libros) {
+                System.out.println("Libro prestado: " + libro.getTitulo());
+            }
             System.out.println("Nombre del cliente: " + nombreCliente);
             System.out.println("Domicilio del cliente: " + domicilioCliente);
             System.out.println("Correo del cliente: " + correo);
@@ -93,7 +95,7 @@ public class Trabajador extends Persona{
             System.out.println("Fecha de prestamo: " + dateFormat.format(fechaPrestamo));
             System.out.println("Fecha de la devolucion: " + fechaDevolucion);
 
-            //Reglas
+            //Mostrar Reglas
             String rutaArchivo = "reglas.txt";
 
             try {
@@ -111,8 +113,7 @@ public class Trabajador extends Persona{
                 e.printStackTrace();
             }
 
-            librosPrestados.add(libro);
-            cliente.tomarLibro(libro);
+            librosPrestados.addAll(libros);
 
         } else{
             System.out.println("Regrese mas tarde con su INE para poder procesar su prestamo");
