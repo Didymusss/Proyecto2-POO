@@ -28,6 +28,10 @@ public class FachadaPrestamo {
         return inventario.buscarLibro(numCodigo);
     }
 
+    public void setInventario(Inventario inventario) {
+        this.inventario = inventario;
+    }
+
     
     
 }
