@@ -4,11 +4,14 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import Libro.Libro;
+import Persona.Cliente;
 
-public class Registro {
+public class Registro implements Observador{
+
     private int numClientes;
     private int numLibros;
     private int numLibrosPrestamo;
@@ -72,6 +75,14 @@ public class Registro {
             System.out.println("Error: " + e.getMessage());
         }
 
+
+    }
+    
+    
+    @Override
+    public void update() {
+        // TODO Auto-generated method stub
+        System.out.println("¿Que se actualizo?");
 
     }
 

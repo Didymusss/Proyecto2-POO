@@ -34,6 +34,18 @@ public class Cliente extends Persona {
         return librosTomados;
     }
 
+    public Cliente(){}
+
+    public Libro buscarLibro(int num){
+        for (Libro libro: librosTomados){
+            if(libro.getNumCodigo() == num){
+                return libro;
+            }
+        }
+
+        return null;
+    }
+
 
     //Libros que toma prestado el cliente
     public void tomarLibro(Libro libro) {

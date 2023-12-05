@@ -26,6 +26,10 @@ public class PersonaFacade {
         cliente.devolverLibro(libro);
     }
 
+    public Libro buscarLibroCliente(int num){
+        return cliente.buscarLibro(num);
+    }
+
     public void infoTrabajador() {
         trabajador.infoTrabajador();
     }

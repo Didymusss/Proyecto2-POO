@@ -28,10 +28,10 @@ public class Inventario {
 
     }
 
-    public void guardarInventario(LinkedList<Libro> inventario){
+    public void guardarInventario(){
         try {
             ObjectOutputStream fileOut = new ObjectOutputStream(new FileOutputStream("inventarioLibros"));
-            fileOut.writeObject(inventario);
+            fileOut.writeObject(this.inventarioLibros);
             fileOut.close();
         } catch (Exception e) {
            

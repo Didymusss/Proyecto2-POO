@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+import Biblioteca.Inventario;
 import Libro.CienciaFiccionBuilder;
 import Libro.Comedia;
 import Libro.Director;
@@ -32,8 +33,11 @@ public class Biblioteca{
         System.out.println("1. Trabajador");
         System.out.println("2. Cliente");
         opcion = input.nextInt();
+        
 
         if(opcion == 1){//Trabajador
+            Trabajador trabajador = new Trabajador();
+            Cliente cliente = new Cliente();
 
             System.out.println("Iniciar sesion o crear usuario?");
             System.out.println("1. Iniciar sesion");
@@ -43,6 +47,7 @@ public class Biblioteca{
             if(opcion == 1){
                 System.out.println("------Inicio de sesion------");
                 System.out.print("Usuario: ");
+                input.nextLine();
                 String userName = input.nextLine();
                 System.out.print("Contraseña: ");
                 String password = input.nextLine();
@@ -55,8 +60,21 @@ public class Biblioteca{
                     
                     
                 }
+
+
+                System.out.println("Ingresa tu núnero de trabajador: ");
+                int numTrabajador = input.nextInt();
+         
+
+                for(Trabajador tempTrabajador: listaTrabajadores){
+                    if(tempTrabajador.getNumTrabajador() == numTrabajador){
+                        trabajador = tempTrabajador;
+                        break;
+                    }
+                }
             } else {
                 System.out.print("Usuario: ");
+                input.nextLine();
                 String userName = input.nextLine();
                 System.out.print("Contraseña: ");
                 String password = input.nextLine();
@@ -85,7 +103,7 @@ public class Biblioteca{
                 System.out.print("Número de trabajador: ");
                 int numTrabajador = input.nextInt();
 
-                Trabajador trabajador = new Trabajador(nombre, domicilio, correo, rfc, numTrabajador);
+                trabajador = new Trabajador(nombre, domicilio, correo, rfc, numTrabajador);
 
                 listaTrabajadores.add(trabajador);
                                             
@@ -111,18 +129,18 @@ public class Biblioteca{
 
                     Scanner scanner = new Scanner(System.in);
                     System.out.print("Ingresa el nombre del cliente: ");
-                    String nombreCliente = scanner.nextLine();
+                    String nombreCliente = input.nextLine();
             
                     System.out.print("Ingresa el domicilio del cliente: ");
-                    String domicilioCliente = scanner.nextLine();
+                    String domicilioCliente = input.nextLine();
             
                     System.out.print("Ingresa el correo del cliente: ");
-                    String correoCliente = scanner.nextLine();
+                    String correoCliente = input.nextLine();
             
                     System.out.print("Ingresa el numero de cliente: ");
-                    int numCliente = scanner.nextInt();
+                    int numCliente = input.nextInt();
             
-                    Cliente cliente = new Cliente(nombreCliente, domicilioCliente, correoCliente, numCliente, true);
+                    cliente = new Cliente(nombreCliente, domicilioCliente, correoCliente, numCliente, true);
 
                     listaClientes.add(cliente);//El cliente se guarda en la lista y ya esta registrado 
 
@@ -147,14 +165,14 @@ public class Biblioteca{
                 case 3:
 
                 
-                    /* 
+                 
                     System.out.println("****Prestamos****");
 
                     System.out.print("\nIngresa el numero del cliente que requiere el prestamo: ");
-                    int numPrestamo = scanner.nextInt();
+                    int numPrestamo = input.nextInt();
 
                     System.out.print("\nIngrese su numero de trabajador: ");
-                    int numTrabajador = scanner.nextInt();
+                    int numTrabajador = input.nextInt();
 
                     for (Cliente clientePrestamo : listaClientes) {
                         if (clientePrestamo.getNumeroCliente() == numPrestamo) {
@@ -168,7 +186,7 @@ public class Biblioteca{
                         }else{
                             System.out.println("No se encontro al cliente en la lista, registralo antes");
                         }
-                    } */
+                    } 
                     
 
                 break;
@@ -301,6 +319,11 @@ public class Biblioteca{
                     System.out.print("\nIngresa tu numero de trabajador: ");
                     int trabajadorUsuario = input.nextInt();
 
+                    System.out.println("Ingrese el numero de libro a devolver: ");
+                    int numDevolver = input.nextInt();
+
+                    Libro devolucion = cliente.buscarLibro(numDevolver);
+
                     for (Trabajador trabajdorD : listaTrabajadores) {
                         if (trabajdorD.getNumTrabajador() == trabajadorUsuario) {
 
@@ -308,6 +331,7 @@ public class Biblioteca{
                                 if (Dcliente.getNumeroCliente() == clienteDevo) {
 
                                     PersonaFacade personaFacade = new PersonaFacade(trabajdorD, Dcliente);
+                                    personaFacade.devolverLibro(devolucion);
                                     
                                 }else{
                                     System.out.println("No se encontro al cliente en la lista, registralo antes");

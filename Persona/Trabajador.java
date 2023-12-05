@@ -18,6 +18,7 @@ public class Trabajador extends Persona{
         this.librosPrestados = new ArrayList<>();
     }
 
+    public Trabajador(){}
     public String getRFC() {
         return RFC;
     }
